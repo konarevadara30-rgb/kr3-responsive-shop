@@ -1,0 +1,111 @@
+/* ===================================
+   Адаптивные стили (Mobile First)
+   =================================== */
+
+/* Планшеты (от 640px) */
+@media (min-width: 640px) {
+  .products-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .order-form__actions { flex-direction: row; }
+}
+
+/* Планшеты / Ноутбуки (от 768px) */
+@media (min-width: 768px) {
+  /* Возвращаем обычную шапку и скрываем бургер */
+  .site-header { position: sticky; top: 0; z-index: 100; }
+  .site-header__inner { flex-direction: row; justify-content: space-between; padding: var(--space-md) var(--space-lg); }
+  .nav-toggle-label { display: none; }
+  
+  /* Возвращаем меню в строку */
+  .site-nav { display: block !important; width: auto; margin-top: 0; }
+  .site-nav__list { flex-direction: row; flex-wrap: wrap; gap: var(--space-sm); }
+  .site-nav__link { padding: 8px 16px; }
+  
+  .hero { padding: var(--space-xl); }
+  .order-form { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .order-form__field--wide { grid-column: 1 / -1; }
+}
+
+/* Десктоп (от 900px) */
+@media (min-width: 900px) {
+  .hero { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-xl); align-items: center; }
+}
+
+/* Десктоп / Каталог (от 1024px) */
+@media (min-width: 1024px) {
+  .products-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .catalog-layout { grid-template-columns: 280px minmax(0, 1fr); align-items: start; }
+  .catalog-filters { position: sticky; top: 88px; }
+}
+
+/* Широкие экраны (от 1280px) */
+@media (min-width: 1280px) {
+  .products-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+
+/* ===================================
+   КАРТОЧНОЕ ПРЕДСТАВЛЕНИЕ ТАБЛИЦЫ (Мобильные)
+   =================================== */
+@media (max-width: 767px) {
+  /* Отключаем горизонтальный скролл для спец-таблиц */
+  .table-wrapper:has(.product-table--specs) {
+    overflow-x: visible;
+  }
+
+  .product-table--specs {
+    min-width: 100%;
+    display: block;
+  }
+  
+  /* Скрываем шапку таблицы */
+  .product-table--specs thead {
+    display: none;
+  }
+
+  /* Превращаем таблицу и строки в блочные элементы */
+  .product-table--specs,
+  .product-table--specs tbody,
+  .product-table--specs tr,
+  .product-table--specs td {
+    display: block;
+    width: 100%;
+  }
+
+  /* Стилизуем строку как карточку */
+  .product-table--specs tr {
+    margin-bottom: var(--space-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background-color: var(--color-white);
+    padding: var(--space-sm);
+  }
+
+  /* Скрываем заголовок строки (th), он нам больше не нужен */
+  .product-table--specs th[scope="row"] {
+    display: none;
+  }
+
+  /* Ячейка с данными становится flex-контейнером */
+  .product-table--specs td {
+    border: none;
+    border-bottom: 1px solid var(--color-surface);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-sm) var(--space-xs);
+    text-align: right;
+  }
+
+  .product-table--specs td:last-child {
+    border-bottom: none;
+  }
+
+  /* Добавляем подпись слева через псевдоэлемент */
+  .product-table--specs td::before {
+    content: attr(data-label);
+    font-weight: 700;
+    color: var(--color-primary);
+    text-align: left;
+    padding-right: var(--space-md);
+  }
+}
